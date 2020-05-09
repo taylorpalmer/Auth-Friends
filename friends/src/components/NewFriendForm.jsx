@@ -24,26 +24,24 @@ const NewFriendForm = () => {
 
   return (
     <div className="new-friend-form">
-      <form>
+      <h2>New Friend</h2>
+      <form onSubmit={submitHandler}>
         <input
           type="text"
           name="username"
           placeholder="username"
-          value="username"
           onChange={changeHandler}
         />
         <input
           type="text"
           name="age"
           placeholder="age"
-          value="age"
           onChange={changeHandler}
         />
         <input
           type="text"
           name="email"
           placeholder="email"
-          value="email"
           onChange={changeHandler}
         />
         <input type="submit" value="Submit" />

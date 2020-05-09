@@ -1,9 +1,17 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
+import LoginForm from "./components/LoginForm";
+import NewFriendForm from "./components/NewFriendForm";
+
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <h1>Friends!</h1>
+      <LoginForm />
+      <NewFriendForm />
+    </div>
+  );
 }
 
 export default App;
