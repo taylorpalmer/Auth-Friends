@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   console.log("change: ", username, password);
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setIsLoading(true);
     axios
       .post("http://localhost:5000/api/login", { username, password })
       .then((res) => {
@@ -19,11 +21,13 @@ const LoginForm = () => {
       });
     setUsername("");
     setPassword("");
+    setIsLoading(false);
+    props.history.push("/friendList");
   };
 
   return (
     <div className="login-form">
-      <h2>Login</h2>
+      <h2>{isLoading ? "...loading" : "Login"}</h2>
       <form onSubmit={submitHandler}>
         <input
           type="text"
