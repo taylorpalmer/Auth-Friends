@@ -17,11 +17,21 @@ const LoginForm = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    axios
+      .post("http://localhost:5000/api/login", { username, password })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    setUsername("");
+    setPassword("");
   };
 
   return (
     <div className="login-form">
-      <form>
+      <form onSubmit={submitHandler}>
         <input
           type="text"
           name="username"
@@ -30,7 +40,7 @@ const LoginForm = () => {
           onChange={changeHandler}
         />
         <input
-          type="text"
+          type="password"
           name="password"
           placeholder="password"
           value="password"
