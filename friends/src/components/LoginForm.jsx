@@ -5,15 +5,6 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // const changeHandler = (event) => {
-  //   if (event.target.name === username) {
-  //     setUsername(event.target.value);
-  //   } else if (event.target.name === password) {
-  //     setPassword(event.target.value);
-  //   } else {
-  //     console.log("invalid");
-  //   }
-  // };
   console.log("change: ", username, password);
 
   const submitHandler = (event) => {

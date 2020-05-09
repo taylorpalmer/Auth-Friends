@@ -1,25 +1,22 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosWithAuth from "./axiosWithAuth";
 
-const NewFriendForm = () => {
-  const [username, setUsername] = useState("");
+const NewFriendForm = (props) => {
+  console.log(props);
+  const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
 
-  const changeHandler = (event) => {
-    if (event.target.name === username) {
-      setUsername(event.target.value);
-    } else if (event.target.name === age) {
-      setAge(event.target.value);
-    } else if (event.target.name === email) {
-      setEmail(event.target.value);
-    } else {
-      console.log("invalid");
-    }
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("http://localhost:5000/api/friends", { name, age, email })
+      .then((res) => {
+        return props.setFriends(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -28,21 +25,21 @@ const NewFriendForm = () => {
       <form onSubmit={submitHandler}>
         <input
           type="text"
-          name="username"
-          placeholder="username"
-          onChange={changeHandler}
+          name="name"
+          placeholder="name"
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
           name="age"
           placeholder="age"
-          onChange={changeHandler}
+          onChange={(e) => setAge(e.target.value)}
         />
         <input
           type="text"
           name="email"
           placeholder="email"
-          onChange={changeHandler}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input type="submit" value="Submit" />
       </form>

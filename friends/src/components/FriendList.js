@@ -10,16 +10,25 @@ const FriendList = () => {
     axiosWithAuth()
       .get("http://localhost:5000/api/friends")
       .then((res) => {
-        console.log(res);
+        setFriends(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  console.log("friends:", friends);
+
   return (
     <div className="friend-list">
-      <NewFriendForm />
+      <NewFriendForm setFriends={setFriends} />
+      {friends.map((friend) => {
+        return (
+          <div>
+            <p>{friend.name}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
